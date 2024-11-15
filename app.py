@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from data.data import Data
+from user import User
 import time
 import threading
 
@@ -7,8 +8,15 @@ import threading
 app = Flask(__name__)
 
 def send_messages(data):
+
+    #look out for live games with 5 minutes left in the 4th and have a point differential of 5 or less 
+    user = User(5, 5)
+
     for game in data.live_games:
-        if 
+
+        if (game.period == 4 and game.under(user.clutch_time) and game.is_close(user.clutch_points)):
+            print("WATCH THIS GAME")
+            #send message to user 
 
 
 def update(data, interval):
@@ -17,11 +25,6 @@ def update(data, interval):
         # print(f"{threading.current_thread().name}")
         data.update_data()
         send_messages(data)
-        for game in data.live_games:
-            print(game)
-            print(game.game_status_text)
-            print(game.game_clock)
-            print(game.period)
 
 @app.route('/')
 def home():

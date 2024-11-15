@@ -7,6 +7,8 @@ class Team:
         self.name = dict_team["teamName"]
         self.city = dict_team["teamCity"]
     
+    def getPoints(self):
+        return self.score
 
     def __str__(self):
         return f"{self.city} {self.name} {self.score}"
