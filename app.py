@@ -10,12 +10,13 @@ app = Flask(__name__)
 def send_messages(data):
 
     #look out for live games with 5 minutes left in the 4th and have a point differential of 5 or less 
-    user = User(5, 5)
+    user = User(5, 10)
 
     for game in data.live_games:
 
         if (game.period == 4 and game.under(user.clutch_time) and game.is_close(user.clutch_points)):
             print("WATCH THIS GAME")
+            print(game)
             #send message to user 
 
 

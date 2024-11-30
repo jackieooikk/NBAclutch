@@ -17,15 +17,20 @@ class LiveGame:
 
         self.game_status_text = live_game_dict["gameStatusText"]
 
+
     def clock_to_min(self):
-        if (self.game_clock[0] == 'P'):
-            return int(self.game_clock[2:4])
-        else:
-            return int(self.game_clock[0:2])
+        try:
+            if (self.game_clock[0] == 'P'):
+                return int(self.game_clock[2:4])
+            else:
+                return int(self.game_clock[0:2])
+        except :
+            return 0
         
 
     def is_close(self, points):
         difference = abs(self.home_team.getPoints() - self.away_team.getPoints())
+
         return difference <= points
     
     def under(self, time):
